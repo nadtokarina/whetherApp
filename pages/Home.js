@@ -1,46 +1,47 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, ScrollView} from 'react-native';
+import propTypes from 'prop-types';
 
-export default function Home() {
+export default function Home({temp, condition, wind, humidity, pressure, city}) {
     return (
-        <View style={styles.container}> //контейнер, в который заключено поле ввода для поиска города, в котором нужно посмотреть прогноз погоды
-            <View style={styles.inputWrapper}> //контейнер, чтобы расположить элементы горизонтально
-                <TextInput style={styles.textInput} placeholder='Найти город...' /> // поле ввода
-                <View style={styles.buttonWrapper}><Button title='Найти' color={'#fff'} /></View> // Кнопка для начала поиска нужного города
+        <View style={styles.container}>
+            <View style={styles.inputWrapper}>
+                <TextInput style={styles.textInput} placeholder='Найти город...' />
+                <View style={styles.buttonWrapper}><Button title='Найти' color={'#fff'} /></View> 
             </View>
-            <Text style={styles.location}>Moscow, Russia</Text> // Текстовый элемент, Название города в котором просматриваетс прогноз
-            <Text style={styles.day}>Tue, Jun 30</Text> // Дата
-            <View style={styles.degreesWrapper}> // Контейнер в котором распологаются данные о тпмпературе воздуха, нужен чтобы расположить элементы на экране так, как требуется
-                <Image style={styles.imgWeather} source={require('../assets/img/cludy.png')} />  // Изображение, отражающее погоду
+            <Text style={styles.location}>{city}</Text> 
+            <Text style={styles.day}>Tue, Jun 30</Text>
+            <View style={styles.degreesWrapper}>
+                <Image style={styles.imgWeather} source={require('../assets/img/cludy.png')} />  
                 <View>
-                    <Text style={styles.degree}>19°C</Text>
-                    <Text style={styles.weather}>Rainy</Text>
+                    <Text style={styles.degree}>{temp}°</Text>
+                    <Text style={styles.weather}>{condition}</Text>
                 </View>
             </View>
-            <View style={styles.weatherList}> // Контейнер, который содержит подробные данные о погоде: сила ветра, наличие дождя и влажность
-                <TouchableOpacity style={styles.weatherItem}> //Элемент, реагирующий на нажатие, видимость всех элементов, заключенных внутрб этого элемента уменьшается при нажатии
+            <View style={styles.weatherList}>
+                <TouchableOpacity style={styles.weatherItem}> 
                     <View style={styles.weatherItemWrapper}>
                         <Image style={styles.whetherItemImg} source={require('../assets/img/rain-icon.png')} />
-                        <Text style={styles.weatherTitle}>RainFall</Text>
+                        <Text style={styles.weatherTitle}>Pressure</Text>
                     </View>
-                    <Text style={styles.weatherMeasure}>3cm</Text>
+                    <Text style={styles.weatherMeasure}>{pressure}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.weatherItem}>
                     <View style={styles.weatherItemWrapper}>
                         <Image style={styles.whetherItemImg} source={require('../assets/img/wind-icon.png')} />
                         <Text style={styles.weatherTitle}>Wind</Text>
                     </View>
-                    <Text style={styles.weatherMeasure}>19km/h</Text>
+                    <Text style={styles.weatherMeasure}>{wind} m/s</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.weatherItem}>
                     <View style={styles.weatherItemWrapper}>
                         <Image style={styles.whetherItemImg} source={require('../assets/img/humidity-icon.png')} />
                         <Text style={styles.weatherTitle}>Humidity</Text>
                     </View>
-                    <Text style={styles.weatherMeasure}>64%</Text>
+                    <Text style={styles.weatherMeasure}>{humidity}%</Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView style={styles.scrollDays} horizontal={true}> //Список данных с возможностью горизонтальной прокрутки. Отображает данные о прогнозе погоды на последующие часы
+            <ScrollView style={styles.scrollDays} horizontal={true}>
                 <View style={styles.dayTimeWrapper}>
                     <Text style={styles.dayTime}>Now</Text>
                     <Image style={styles.weatherTimeImg} source={require('../assets/img/weatherTime1.png')}/>
@@ -79,6 +80,16 @@ export default function Home() {
             </ScrollView>
         </View>
     );
+}
+
+
+Home.propTypes = {
+    temp: propTypes.number.isRequired,
+    wind: propTypes.number.isRequired,
+    humidity: propTypes.number.isRequired,
+    pressure: propTypes.number.isRequired,
+    city: propTypes.string.isRequired,
+    condition: propTypes.oneOf(["Thunderstorm", "Drizzle", "Rain", "Snow", "Atmosphere", "Clear", "Clouds"]).isRequired,
 }
 
 
