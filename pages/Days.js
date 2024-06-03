@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 
 
-function Days() {
+export default function Days() {
     return (
         <View style={styles.contauner}></View>
     );

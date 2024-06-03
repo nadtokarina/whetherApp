@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, ScrollView} from 'react-native';
 import propTypes from 'prop-types';
+import {NavigationContainer} from '@react-navigation/native';
 
 export default function Home({temp, condition, wind, humidity, pressure, city}) {
     return (
