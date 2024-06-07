@@ -6,10 +6,6 @@ import {NavigationContainer} from '@react-navigation/native';
 export default function Home({temp, condition, wind, humidity, pressure, city}) {
     return (
         <View style={styles.container}>
-            <View style={styles.inputWrapper}>
-                <TextInput style={styles.textInput} placeholder='Найти город...' />
-                <View style={styles.buttonWrapper}><Button title='Найти' color={'#fff'} /></View> 
-            </View>
             <Text style={styles.location}>{city}</Text> 
             <Text style={styles.day}>Tue, Jun 30</Text>
             <View style={styles.degreesWrapper}>
@@ -98,12 +94,12 @@ Home.propTypes = {
 const styles=StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 100,
+        paddingTop: 15,
         width: "100%",
         backgroundColor: "#E2A272",
     },
     location: {
-        marginTop: 20,
+        marginTop: 10,
         color: "#303345",
         fontSize: 25,
         fontWeight: '700',
@@ -140,9 +136,9 @@ const styles=StyleSheet.create({
         justifyContent: 'space-between',
         alignContent: 'center',
         alignSelf: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.36)',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
         padding: 7,
-        borderRadius: 10,
+        borderRadius: 15,
         borderColor: 'rgba(255, 255, 255, 0.3)',
         borderWidth: '0.5',
         shadowColor: 'black', 
@@ -170,25 +166,6 @@ const styles=StyleSheet.create({
         fontSize: 16,
         color: '#303345',
     },
-    inputWrapper: {
-        flexDirection: 'row',
-    },
-    textInput: {
-        margin: 10,
-        padding: 3,
-        marginTop: -10,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        width: '75%',
-        height: 25,
-        borderRadius: 3,
-    },
-    buttonWrapper: {
-        backgroundColor: 'rgba(48, 51, 69, 0.5)',
-        borderRadius: 3,
-        height: 25,
-        marginTop: -10,
-        marginLeft: -5,
-    },
     scrollDays: {
         margin: 10,
     },
@@ -197,8 +174,14 @@ const styles=StyleSheet.create({
         marginTop: 10,
         width: 100,
         height: 150,
-        backgroundColor: 'rgba(255, 255, 255, 0.36)',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
         borderRadius: 20,
+        borderColor: 'rgba(255, 255, 255, 0.3)',
+        borderWidth: '0.5',
+        shadowColor: 'black', 
+        shadowOffset: { width: 0, height: 0 }, 
+        shadowRadius: 2, 
+        shadowOpacity: 0.2,
     },
     dayTime: {
         paddingTop: 15,

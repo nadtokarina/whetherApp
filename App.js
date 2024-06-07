@@ -1,65 +1,63 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Days from './pages/Days';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from '@expo/vector-icons';
 import GetWeather from './pages/getWeather';
+import { BlurView } from 'expo-blur';
 
 
-// const API_KEY = 'f1d721cb8bcedd10301d488f79db8149';
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+function MyTab() {
+  return (
+    <Tab.Navigator
+    screenOptions={{
+      tabBarActiveTintColor: '#E2A272' ,
+      tabBarBackground: () => <BlurView  intensity={95}
+      style={{
+        ...StyleSheet.absoluteFillObject,
+        overflow: 'hidden',
+      }}
+      />
+    }}
+    >
+      <Tab.Screen name='Home' component={GetWeather} options={{title:'Home', 
+      tabBarIcon: ({color}) => <FontAwesome name='home' size={24} color={color} /> }}>
+      </Tab.Screen>
+      <Tab.Screen name='Days' component={Days} options={{title:'Cities', 
+      tabBarIcon: ({color}) => <FontAwesome name='heart' size={20} color={color} /> }}>
+      </Tab.Screen>
+    </Tab.Navigator>
+  )
+}
 
-// export default class extends React.Component {
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={GetWeather} />
+      <Stack.Screen name="Days" component={Days} />
+    </Stack.Navigator>
+  );
+}
 
-//   state = {
-//     isLoading: true
-//   }
-
-//   getWeather = async (latitude, longitude) => {
-//     const {data: {main: {temp, humidity, pressure}, weather, wind, name}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
-//     this.setState({
-//       temp: temp, 
-//       condition: weather[0].main,
-//       wind: wind.speed,
-//       humidity: humidity,
-//       pressure: pressure,
-//       city: name});
-//     console.log(data);
-//   }
-
-//   getLocation = async () => {
-//     try {
-//       await Location.requestForegroundPermissionsAsync();
-//       const {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
-//       this.getWeather(latitude, longitude);
-//     } catch (error) {
-//       Alert.alert('Не получается определить местоположение');
-//     }
-
-//   }
-
-//   componentDidMount() {
-//     this.getLocation();
-//   }
-
-//   render () {
-//     const {isLoading, temp, condition, wind, humidity, pressure, city} = this.state
-//     return (
-//         <View style={styles.container}>
-//           <Home temp={Math.round(temp)} condition={condition} wind={Math.round(wind)} humidity={humidity} pressure={pressure} city={city}/>
-//         </View>
-//     );
-//   }
-// }
 
 export default function App() {
   return(
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name='Home' component={GetWeather} />
+      <MyTab />
+      {/* <Tab.Navigator 
+      screenOptions={{headerShown: false}}>
+      <Tab.Screen name='Home' component={GetWeather} options={{title:'Home', 
+      tabBarIcon:({size, icon}) => (
+      <Ionicons name="ios-home-outline" size={24} color="#121111" />
+      )}}>
+        </Tab.Screen>
         <Tab.Screen name='Days' component={Days} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
   </NavigationContainer>
   )
 }
