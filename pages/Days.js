@@ -1,6 +1,6 @@
 // На этой странице будет отображен список "избранных " городов, городов, погоду в которых можно посмотреть в быстром доступе
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Platform } from 'react-native';
 
 
 
@@ -65,6 +65,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: 30,
         borderRadius: 7,
+        ...Platform.select ({
+            android: {
+                borderRadius: 5,
+            },
+            default: {
+                borderRadius: 5,
+            }
+        })
     },
     cityWrapper: {
         // flexDirection: 'row',
@@ -75,15 +83,27 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
         padding: 7,
-        borderRadius: 15,
-        borderColor: 'rgba(255, 255, 255, 0.3)',
         borderWidth: '0.5',
         shadowColor: 'black', 
         shadowOffset: { width: 0, height: 0 }, 
         shadowRadius: 2, 
         shadowOpacity: 0.2,
+        ...Platform.select ({
+            ios: {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: 15,
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+            },
+            android: {
+                backgroundColor: '#FCDCC2',
+                borderRadius: 5,
+            },
+            default: {
+                backgroundColor: '#FCDCC2',
+                borderRadius: 5,
+            }
+        })
     },
     cityName: {
         paddingTop: 17,

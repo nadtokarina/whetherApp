@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button, ScrollView, Platform} from 'react-native';
 import propTypes from 'prop-types';
-import {NavigationContainer} from '@react-navigation/native';
 
 export default function Home({temp, condition, wind, humidity, pressure, city}) {
     return (
@@ -97,6 +96,18 @@ const styles=StyleSheet.create({
         paddingTop: 15,
         width: "100%",
         backgroundColor: "#E2A272",
+        ...Platform.select({
+            ios: {
+                backgroundColor: "#E2A272",
+            },
+            android: {
+                backgroundColor: "#E2A272",
+            },
+            default: {
+                backgroundColor: '#E2A272',
+            }
+        })
+
     },
     location: {
         marginTop: 10,
@@ -136,15 +147,27 @@ const styles=StyleSheet.create({
         justifyContent: 'space-between',
         alignContent: 'center',
         alignSelf: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
         padding: 7,
-        borderRadius: 15,
-        borderColor: 'rgba(255, 255, 255, 0.3)',
-        borderWidth: '0.5',
         shadowColor: 'black', 
         shadowOffset: { width: 0, height: 0 }, 
         shadowRadius: 2, 
         shadowOpacity: 0.2,
+        ...Platform.select ({
+            ios: {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: 15,
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                borderWidth: '0.5',
+            },
+            android: {
+                backgroundColor: '#FCDCC2',
+                borderRadius: 5,
+            },
+            default: {
+                backgroundColor: '#FCDCC2',
+                borderRadius: 5,
+            }
+        })
     },
     weatherItemWrapper: {
         flexDirection: 'row',
@@ -172,22 +195,51 @@ const styles=StyleSheet.create({
     dayTimeWrapper: {
         margin: 5,
         marginTop: 10,
-        width: 100,
-        height: 150,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        borderRadius: 20,
-        borderColor: 'rgba(255, 255, 255, 0.3)',
-        borderWidth: '0.5',
-        shadowColor: 'black', 
-        shadowOffset: { width: 0, height: 0 }, 
-        shadowRadius: 2, 
-        shadowOpacity: 0.2,
+        ...Platform.select ({
+            ios: {
+                width: 100,
+                height: 150,
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: 20,
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                borderWidth: '0.5',
+                shadowColor: 'black', 
+                shadowOffset: { width: 0, height: 0 }, 
+                shadowRadius: 2, 
+                shadowOpacity: 0.2,
+            },
+            android: {
+                width: 100,
+                height: 150,
+                backgroundColor: 'rgba(255, 255, 255)',
+            },
+            default: {
+                width: 170,
+                height: 200,
+                backgroundColor: '#FCDCC2',
+                borderRadius: 5,
+                shadowColor: 'black', 
+                shadowOffset: { width: 0, height: 0 }, 
+                shadowRadius: 2, 
+                shadowOpacity: 0.2,
+            }
+        })
     },
     dayTime: {
         paddingTop: 15,
-        fontSize: 16,
         color: '#303345',
         alignSelf: 'center',
+        ...Platform.select ({
+            ios: {
+                fontSize: 16,
+            },
+            android: {
+                fontSize: 16,
+            },
+            default: {
+                fontSize: 24,
+            }
+        })
     },
     weatherTimeImg: {
         width: 70,
@@ -196,9 +248,19 @@ const styles=StyleSheet.create({
         alignSelf: 'center',
     },
     weatherNow: {
-        fontSize: 20,
         fontWeight: '600',
         color: '#303345',
         alignSelf: 'center',
+        ...Platform.select ({
+            ios: {
+                fontSize: 20,
+            },
+            android: {
+                fontSize: 20,
+            },
+            default: {
+                fontSize: 30,
+            }
+        })
     }
 })
