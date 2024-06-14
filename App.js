@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, Platform } from 'react-native';
+import { StyleSheet, Text, View, Alert, Platform, LogBox } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Days from './pages/Days';
@@ -7,6 +7,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 import GetWeather from './pages/getWeather';
 import { BlurView } from 'expo-blur';
+
+LogBox.ignoreLogs([
+  'Warning: Failed prop type: The prop `humidity` is marked as required in `Home`, but its value is `undefined`.',
+  'Warning: Failed prop type: The prop `pressure` is marked as required in `Home`, but its value is `undefined`.',
+  'Warning: Failed prop type: The prop `city` is marked as required in `Home`, but its value is `undefined`.',
+  'Warning: Failed prop type: The prop `condition` is marked as required in `Home`, but its value is `undefined`.',
+
+  /GraphQL error: .*/,
+])
 
 
 const Stack = createNativeStackNavigator();
