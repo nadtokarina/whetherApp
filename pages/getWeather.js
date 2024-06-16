@@ -25,7 +25,7 @@ getWeather = async (latitude, longitude) => {
     humidity: humidity,
     pressure: pressure,
     city: name});
-    console.log(data);
+    // console.log(data);
 }
 
 getLocation = async () => {
